@@ -13,11 +13,11 @@ var merge = require('webpack-merge')
 // 通过glob模块读取pages文件夹下的所有对应文件夹下的js后缀文件，如果该文件存在
 // 那么就作为入口处理
 exports.entries = function () {
-    var entryFiles = glob.sync(PAGE_PATH + '/*/*.js')
+    var entryFiles = glob.sync(PAGE_PATH + '/*/*.js');
     var map = {}
     entryFiles.forEach((filePath) => {
-        var filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'))
-        map[filename] = filePath
+      var filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'))
+      map[filename] = filePath
     })
     return map
 }
@@ -48,6 +48,7 @@ exports.htmlPlugin = function () {
                 chunksSortMode: 'dependency'
             })
         }
+        console.log(conf);
         arr.push(new HtmlWebpackPlugin(conf))
     })
     return arr

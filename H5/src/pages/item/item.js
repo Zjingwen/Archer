@@ -1,4 +1,4 @@
-import './index.css';
+import './item.css';
 import Vue from 'vue';
 
 new Vue({
