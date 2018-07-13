@@ -24,7 +24,7 @@ module.exports = {
           'css-loader',
         ],
       },
-    ]
+    ],
   },
   devServer: {
     compress: true,
