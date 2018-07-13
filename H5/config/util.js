@@ -1,33 +1,39 @@
-var path = require('path')
-var glob = require('glob');
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var PAGE_PATH = path.resolve(__dirname, '../src/pages');
-var merge = require('webpack-merge');
+const path = require('path')
+const glob = require('glob');
+const fs = require('fs');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const PAGE_PATH = path.resolve(__dirname, '../src/pages');
+const merge = require('webpack-merge');
+
 
 exports.entries = function () {
-    var entryFiles = glob.sync(PAGE_PATH + '/*/*.js');
-    var map = {}
+    let entryFiles = glob.sync(PAGE_PATH + '/*/*.js');
+    let map = {}
     entryFiles.forEach((filePath) => {
-      var filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'))
+      let filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'))
       map[filename] = filePath
     })
     return map
 }
 
-exports.htmlPlugin = function (name) {
-    let entryHtml = glob.sync(PAGE_PATH + '/*/*.html')
-    let arr = []
+exports.htmlPlugin = function (name,centent) {
+    let entryHtml = glob.sync(PAGE_PATH + '/*/*.html');
+    let arr = [];
     entryHtml.forEach((filePath) => {
-        let filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'))
+        const fileName = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'));
+ 
+        let fileHtml = fs.readFileSync(filePath,'UTF-8');
         let conf = {
-            // 模板来源
-            template: filePath,
-            // 文件名称
-            filename: `${name}/${filename}`,
-            // 页面模板需要加对应的js脚本，如果不加这行则每个页面都会引入所有的js脚本
-            chunks: [ filename ],
-            inject: true
-        }
+            template: centent,
+            filename: `${name}/${fileName}`,
+            chunks: [ fileName ],
+            inject: true,
+            title: 'test',
+            files: {
+                content: fileHtml,
+            }
+        };
+
         if (process.env.NODE_ENV === 'production') {
             conf = merge(conf, {
                 minify: {
@@ -38,7 +44,8 @@ exports.htmlPlugin = function (name) {
                 chunksSortMode: 'dependency'
             })
         }
-        arr.push(new HtmlWebpackPlugin(conf))
-    })
+        arr.push(new HtmlWebpackPlugin(conf));
+    });
+
     return arr
 }
