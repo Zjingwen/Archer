@@ -13,15 +13,15 @@ exports.entries = function () {
       let filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'))
       map[filename] = filePath
     })
-    return map
+    return map;
 }
 
-exports.htmlPlugin = function (name,centent) {
+exports.htmlPlugin = function (centent,name) {
     let entryHtml = glob.sync(PAGE_PATH + '/*/*.html');
     let arr = [];
     entryHtml.forEach((filePath) => {
         const fileName = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'));
- 
+        console.log(process.env.NODE_ENV);
         let fileHtml = fs.readFileSync(filePath,'UTF-8');
         let conf = {
             template: centent,
@@ -31,18 +31,19 @@ exports.htmlPlugin = function (name,centent) {
             title: 'test',
             files: {
                 content: fileHtml,
-            }
+            },
         };
 
         if (process.env.NODE_ENV === 'production') {
             conf = merge(conf, {
+                filename: `${fileName}/${fileName}.html`,
                 minify: {
                     removeComments: true,
                     collapseWhitespace: true,
                     removeAttributeQuotes: true
                 },
                 chunksSortMode: 'dependency'
-            })
+            });
         }
         arr.push(new HtmlWebpackPlugin(conf));
     });
