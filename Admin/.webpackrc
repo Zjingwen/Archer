@@ -1,0 +1,59 @@
+{
+  "env": {
+    "development": {
+      "publicPath":"/",
+      "extraBabelPlugins": [
+        [
+          "import",
+          {
+            "libraryName": "antd",
+            "libraryDirectory": "es",
+            "style": "css"
+          }
+        ]
+      ],
+      "define":{
+        "process.env.NODE_ENV": "development"
+      },
+      "html": {
+        "filename": "index.html",
+        "template": "./public/temp.ejs",
+        "hash": true,
+        "xhtml": true
+      },
+      "proxy":{
+        "/api":{
+          "target": "http://127.0.0.1:7001"
+        }
+      }
+    },
+    "production": {
+      "define":{
+        "process.env.NODE_ENV": "production"
+      },
+      "extraBabelPlugins": [
+        [
+          "import",
+          {
+            "libraryName": "antd",
+            "libraryDirectory": "es",
+            "style": "css"
+          }
+        ]
+      ],
+      "html": {
+        "filename": "index.html",
+        "template": "./public/index.ejs",
+        "inject": false,
+        "hash": false,
+        "xhtml": true,
+        "files": {
+          "main": [
+            "/static/Admin/dist/index.js",
+            "/static/Admin/dist/index.css"
+          ]
+        }
+      }
+    }
+  }
+}
