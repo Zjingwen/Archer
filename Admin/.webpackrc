@@ -49,8 +49,8 @@
         "xhtml": true,
         "files": {
           "main": [
-            "/static/Admin/dist/index.js",
-            "/static/Admin/dist/index.css"
+            "/Admin/dist/index.js",
+            "/Admin/dist/index.css"
           ]
         }
       }
