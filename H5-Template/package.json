@@ -1,7 +1,7 @@
 {
-  "name": "H5",
+  "name": "h5",
   "version": "1.0.0",
-  "description": "简单h5项目配置",
+  "description": "多入口h5页面通用模版",
   "main": "index.js",
   "scripts": {
     "server": "NODE_ENV=development webpack-dev-server --config config/webpack.dev.config.js",
