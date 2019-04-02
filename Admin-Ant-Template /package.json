@@ -1,15 +1,27 @@
 {
   "name": "admin",
+  "version": "1.0.0",
   "description": "ant管理台通用模版",
-  "private": true,
+  "author": "jingwen <309940379@qq.com>",
+  "main": "src/index.js",
   "scripts": {
     "start": "roadhog server",
     "build": "roadhog build",
     "lint": "eslint --ext .js src test",
     "precommit": "npm run lint"
   },
+  "keywords": [
+    "react",
+    "admin",
+    "antd",
+    "admin-template"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zjingwen/Archer.git"
+  },
   "dependencies": {
-    "antd": "3.10.0",
+    "antd": "3.16.1",
     "babel-plugin-import": "1.6.7",
     "co": "4.6.0",
     "dva": "2.4.1",
@@ -17,8 +29,8 @@
     "mockjs": "1.0.1-beta3",
     "moment": "2.22.2",
     "prop-types": "15.6.2",
-    "react": "16.2.0",
-    "react-dom": "16.2.0",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
     "underscore": "1.9.1"
   },
   "devDependencies": {
@@ -34,5 +46,9 @@
     "prop-types": "15.6.1",
     "redbox-react": "1.4.3",
     "roadhog": "2.5.0-beta.4"
+  },
+  "engines":{
+    "node": ">=8.9.1",
+    "npm": ">=6.1.0"
   }
 }
