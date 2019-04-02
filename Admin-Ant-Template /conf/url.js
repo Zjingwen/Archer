@@ -9,6 +9,4 @@ const CONF = {
   },
 };
 
-module.exports = {
-  development: CONF.development['mock'],// 需要切换可直接修改，mock或者url
-};
+module.exports = CONF.development['mock']; // 需要切换可直接修改，mock或者url
