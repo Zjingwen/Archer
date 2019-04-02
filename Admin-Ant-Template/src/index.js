@@ -7,9 +7,9 @@ moment.locale('zh-cn');
 
 // 1. Initialize
 const app = dva({
-    initialState: {
-    },
-    history: browserHistory(),
+  initialState: {
+  },
+  history: browserHistory(),
 });
 
 // 2. Plugins
