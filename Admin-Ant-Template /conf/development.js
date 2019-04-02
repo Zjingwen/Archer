@@ -1,6 +1,14 @@
+const URL = require('./url');
+let alias = require('./alias');
+
 module.exports = {
+  "entry": "src/index.js",
   "publicPath":"/",
+  "define":{
+    "process.env.NODE_ENV": "development"
+  },
   "extraBabelPlugins": [
+    "dva-hmr",
     [
       "import",
       {
@@ -10,18 +18,18 @@ module.exports = {
       }
     ]
   ],
-  "define":{
-    "process.env.NODE_ENV": "development"
-  },
   "html": {
     "filename": "index.html",
-    "template": "./public/temp.ejs",
+    "template": "./index.ejs",
     "hash": true,
     "xhtml": true
   },
   "proxy":{
     "/api":{
-      "target": "http://127.0.0.1:7001"
-    }
-  }
-}
+      "target": URL,
+      "changeOrigin": true,
+      "pathRewrite": {"^/api": ""},
+    },
+    "alias": alias,
+  },
+};

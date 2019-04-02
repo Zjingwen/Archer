@@ -1,8 +1,13 @@
+let alias = require('./alias');
+
 module.exports = {
+  "entry":"src/index.js",
+  "publicPath":"/",
   "define":{
     "process.env.NODE_ENV": "production"
   },
   "extraBabelPlugins": [
+    "dva-hmr",
     [
       "import",
       {
@@ -14,15 +19,10 @@ module.exports = {
   ],
   "html": {
     "filename": "index.html",
-    "template": "./public/index.ejs",
-    "inject": false,
+    "template": "./index.ejs",
     "hash": false,
-    "xhtml": true,
-    "files": {
-      "main": [
-        "/Admin/dist/index.js",
-        "/Admin/dist/index.css"
-      ]
-    }
-  }
-}
+    "xhtml": true
+  },
+  "hash": true,
+  "alias": alias,
+};
