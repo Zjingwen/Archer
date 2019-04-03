@@ -18,7 +18,7 @@ export default [
     iconType: 'desktop'
   },
   {
-    path: '/admin/login',
+    path: '/admin/sign',
     component: userPage,
     breadcrumbName: '登陆',
     iconType: 'video-camera',
