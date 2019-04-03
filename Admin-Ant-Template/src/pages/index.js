@@ -1,7 +1,7 @@
-import indexPage from './indexPage';
-import loginPage from './loginPage';
-import coustomerPage from './customerPage';
-import activityPage from './activityPage';
+import indexPage from './indexPage/index';
+import userPage from './userPage/sign';
+import coustomerPage from './customerPage/index';
+import activityPage from './activityPage/index';
 
 export default [
   {
@@ -19,7 +19,7 @@ export default [
   },
   {
     path: '/admin/login',
-    component: loginPage,
+    component: userPage,
     breadcrumbName: '登陆',
     iconType: 'video-camera',
     Menu: false
