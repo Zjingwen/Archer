@@ -4,10 +4,11 @@ import './index.css';
 import dva from 'dva';
 import browserHistory from 'history/createBrowserHistory';
 import moment from 'antd/node_modules/moment';
+import router from './router';
 import {message} from 'antd';
 
 moment.locale('zh-cn');
-
+const PATH = '/admin'; // 设置根路径
 // 1. Initialize
 const app = dva({
   initialState: {
@@ -25,7 +26,7 @@ const app = dva({
 // app.model(require('./models/login').default);  
 
 // 4. Router
-app.router(require('./router').default);
+app.router(({ history, app})=>router({history, app, PATH}));
 
 // 5. Start
 app.start('#root');
