@@ -27,13 +27,13 @@ export default [
   {
     path: '/admin/coustomer',
     component: coustomerPage,
-    breadcrumbName: '充值管理2',
+    breadcrumbName: '充值管理',
     iconType: 'pay-circle'
   },
   {
     path: '/admin/activity',
     component: activityPage,
-    breadcrumbName: '活动管理3',
+    breadcrumbName: '活动管理',
     iconType: 'bulb'
   },
 ];

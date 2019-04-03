@@ -30,6 +30,6 @@ module.exports = {
       "changeOrigin": true,
       "pathRewrite": {"^/api": ""},
     },
-    "alias": alias,
   },
+  "alias": alias,
 };

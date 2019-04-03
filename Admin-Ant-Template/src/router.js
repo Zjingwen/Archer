@@ -1,6 +1,7 @@
 import React from 'react';
 import { Router, Route, Switch } from 'dva/router';
 import routerMap from './routes';
+import NotFound from '@pages/notFoundPage/404';
 
 function RouterConfig({ history }) {
   const routers = [];
@@ -11,6 +12,7 @@ function RouterConfig({ history }) {
     <Router history={history}>
       <Switch>
         {routers}
+        <Route component={NotFound}/>
       </Switch>
     </Router>
   );
