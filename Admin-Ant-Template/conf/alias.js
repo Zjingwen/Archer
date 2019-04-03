@@ -8,12 +8,10 @@
  */
 let path = require('path');
 
-const alias = {
+module.exports = {
   '@utils': path.resolve('src/utils'),
   '@pages': path.resolve('src/pages'),
   '@components': path.resolve('src/components'),
   // '@models': path.resolve('src/models'),
   // '@hoc':path.resolve('src/hoc'),
-};
-
-module.exports = alias;
+};;
