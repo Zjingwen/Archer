@@ -3,9 +3,9 @@
  */
 const CONF = {
   development: {
-    "url": "",// 测试域名
-    "mock": "http://localhost:8001/",// 本地mock域名
-    "diy": "",// 特殊情况下使用
+    "url": "", // 测试域名
+    "mock": "http://localhost:8001/", // 本地mock域名
+    "diy": "", // 特殊情况下使用
   },
 };
 
