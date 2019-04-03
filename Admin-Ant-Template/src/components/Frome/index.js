@@ -1,29 +1,66 @@
+/**
+ * @todo bug 会重复渲染两次
+ * @todo 优化 抽离FromeMenu、FromeHeader为独立文件
+ * @todo 优化 menu有子目录的时候，点击子目录不关闭
+ */
 import styles from './index.css';
 import React from 'react';
 import { Layout, Menu, Icon, Dropdown } from 'antd';
 import { Link } from 'dva/router';
 import routerMap from '@pages';
-const { Header, Sider, Content } = Layout;
+import {jsonToQuery} from '@utils/assist';
 
+const { Header, Sider, Content } = Layout;
+const SubMenu = Menu.SubMenu;
 
 class FromeMenu extends React.Component {
   constructor(props) {
-    const locationHash = window.location.hash.indexOf('#') > -1 ? window.location.hash.slice(1) : window.location.pathname;
     super(props);
+    /**
+     * @todo 使用router的方法，不用window方法
+     */
+    const locationHash = window.location.hash.indexOf('#') > -1 ? window.location.hash.slice(1) : window.location.pathname;
     this.state = {
       key: [locationHash]
     };
   }
 
-  render() {
-    const MenuItems = [];
+  subMenuChildrens({next, path}){
+    return next.map((value)=>{
+      const QUERY = value.hasOwnProperty('query') ? jsonToQuery(value.query) : '';
+      const PATH = path + value.path;
 
-    routerMap.forEach((value, index) => {
-      if (value.hasOwnProperty('Menu')) return;
-      MenuItems.push(<Menu.Item key={value.path}>
+      return (<Menu.Item key={PATH}>
+        <Link to={{
+          pathname: PATH,
+          search: `?${QUERY}`
+        }}>
+          <Icon type={value.iconType} />{value.breadcrumbName}
+        </Link>
+      </Menu.Item>);
+    });
+  }
+
+
+  render() {
+    const ROUTER_SELECT = routerMap.filter((v) => {
+      if(v.hasOwnProperty('menu')) return v.menu ? true : false;
+      return true;
+    });
+
+    const MENU_ITEMS = ROUTER_SELECT.map((value) => {
+      if(value.hasOwnProperty('next')){
+        return(<SubMenu key={value.path} title={<><Icon type={value.iconType} />{value.breadcrumbName}</>}>
+          {this.subMenuChildrens({
+            next: value.next,
+            path: value.path,
+          })}
+        </SubMenu>);
+      };
+
+      return (<Menu.Item key={value.path}>
         <Link to={value.path}>
-          <Icon type={value.iconType} />
-          <span>{value.breadcrumbName}</span>
+          <Icon type={value.iconType} />{value.breadcrumbName}
         </Link>
       </Menu.Item>);
     });
@@ -39,17 +76,12 @@ class FromeMenu extends React.Component {
           mode="inline"
           defaultSelectedKeys={this.state.key}
         >
-          {/* <Menu.Item key={1}>
-                    <Link to={'/admin/login'}>
-                        login
-                    </Link>
-                </Menu.Item> */}
-          {MenuItems}
+          {MENU_ITEMS}
         </Menu>
       </Sider>
     );
   };
-}
+};
 
 class FromeHeader extends React.Component {
 
@@ -75,9 +107,9 @@ class FromeHeader extends React.Component {
           </Dropdown>
         </div>
       </Header>
-    )
+    );
   }
-}
+};
 
 class Frome extends React.Component {
   state = {
@@ -104,6 +136,6 @@ class Frome extends React.Component {
       </Layout>
     );
   };
-}
+};
 
 export default Frome;

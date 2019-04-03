@@ -18,7 +18,7 @@ export default{
     breadcrumbName: String,
     // icon 类型
     iconType: String,
-    // 是否在menu显示
+    // 是否在menu显示，默认值true
     menu: Boolean,
     // 链接参数默认值
     query: Object,
