@@ -11,12 +11,20 @@ export default {
       component: index,
       breadcrumbName: '已上线',
       iconType: 'bulb',
+      query: {
+        id: '',
+        page: '',
+      },
     },
     {
       path: '/end',
       component: end,
       breadcrumbName: '已结束',
       iconType: 'bulb',
+      query: {
+        id: '',
+        page: '',
+      },
     },
   ],
 };
