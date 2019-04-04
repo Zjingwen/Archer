@@ -20,7 +20,7 @@ class FromeHeader extends React.Component {
         <Icon
           className={styles.trigger}
           type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'}
-          onClick={this.props.updateStateProp}
+          onClick={()=>this.props.updateStateProp()}
         />
         <div style={{ float: "right" }}>
           <Dropdown overlay={menu}>

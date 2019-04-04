@@ -13,11 +13,14 @@ import FromeHeader from './FromeHeader';
 const { Content } = Layout;
 
 class Frome extends React.Component {
-  state = {
-    collapsed: false
-  };
+  constructor(){
+    super();
+    this.state = {
+      collapsed: false
+    };
+  }
 
-  toggle = () => {
+  toggle(){
     this.setState({
       collapsed: !this.state.collapsed,
     });
@@ -28,7 +31,7 @@ class Frome extends React.Component {
       <Layout className={styles.layout}>
         <FromeMenu collapsed={this.state.collapsed} />
         <Layout>
-          <FromeHeader collapsed={this.state.collapsed} updateStateProp={this.toggle} />
+          <FromeHeader collapsed={this.state.collapsed} updateStateProp={()=>this.toggle()} />
           <Content className={styles.content}>
             {this.props.children}
           </Content>

@@ -47,7 +47,7 @@ class FromeMenu extends React.Component {
 
     const MENU_ITEMS = ROUTER_SELECT.map((value) => {
       if(value.hasOwnProperty('next')){
-        return(<SubMenu key={value.path} title={<><Icon type={value.iconType} />{value.breadcrumbName}</>}>
+        return(<SubMenu key={value.path} title={<><Icon type={value.iconType} /><span>{value.breadcrumbName}</span></>}>
           {this.subMenuChildrens({
             next: value.next,
             path: value.path,
@@ -57,7 +57,7 @@ class FromeMenu extends React.Component {
 
       return (<Menu.Item key={value.path}>
         <Link to={value.path}>
-          <Icon type={value.iconType} />{value.breadcrumbName}
+          <Icon type={value.iconType} /><span>{value.breadcrumbName}</span>
         </Link>
       </Menu.Item>);
     });
