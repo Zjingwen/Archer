@@ -1,5 +1,5 @@
 import { routerRedux } from 'dva/router';
-import axios from 'axios';
+import request from '@utils/request';
 import {message} from 'antd';
 
 export default {
@@ -7,7 +7,7 @@ export default {
   state:{},
   effects:{
     * fromPost({payload}, {call, put}){
-      const result = yield call(()=>axios.get('/api/user/sign', { params: payload }));
+      const result = yield call(()=>request('/api/user/sign', { params: payload }));
       const json = result.data;
       const msg = json.status.msg;
 
