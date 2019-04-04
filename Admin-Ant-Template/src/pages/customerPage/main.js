@@ -4,5 +4,9 @@ export default {
   path: '/admin/coustomer',
   component: index,
   breadcrumbName: '充值管理',
-  iconType: 'pay-circle'
+  iconType: 'pay-circle',
+  query: {
+    id: '',
+    page: '',
+  },
 };

@@ -1,3 +1,7 @@
+/**
+ * @todo 优化 是否可以改造为方法函数
+ * @todo 优化，用row和col来代替index.css
+ */
 import styles from './index.css';
 import React from 'react';
 import { Layout, Menu, Icon, Dropdown } from 'antd';
@@ -20,7 +24,7 @@ class FromeHeader extends React.Component {
         <Icon
           className={styles.trigger}
           type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'}
-          onClick={this.props.updateStateProp}
+          onClick={()=>this.props.updateStateProp()}
         />
         <div style={{ float: "right" }}>
           <Dropdown overlay={menu}>
