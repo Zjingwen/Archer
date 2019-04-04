@@ -27,7 +27,7 @@ export default {
       },
       result: {
         name: 'admin-template',
-        token: Random.string('lower',20),
+        sign: Random.string('lower',20),
       },
     });
   }

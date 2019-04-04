@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import styles from './index.css';
-import { Form, Icon, Input, Button, Row, Col, message } from 'antd';
-import axios from 'axios';
+import { Form, Icon, Input, Button, Row, Col } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -11,16 +9,9 @@ class Login extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        const params = { ...values };
-        axios.get('/api/user/sign', { params: params }).then(res => {
-          const json = res.data;
-          const msg = json.status.msg;
-
-          if (json.status.code === 1001) {
-            message.success(msg);
-          } else {
-            message.error(msg);
-          }
+        this.props.dispatch({
+          type: 'userSign/fromPost',
+          payload:{...values},
         });
         return;
       }
@@ -29,9 +20,22 @@ class Login extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const STYLE_LOGIN_FORM = {
+      position: 'fixed',
+      top: '35%',
+      left: '50%',
+      transform: 'translate(-50%,-50%)',
+      minWidth: '450px',  
+      background: '#fff', 
+      padding: '40px 40px 16px',  
+      borderRadius: '5px',
+    };
+    const LOGIN_FROM_BUTTON = {
+      width: '100%',
+    };
 
     return (
-      <Form onSubmit={this.handleSubmit} className={styles.login_form}>
+      <Form onSubmit={this.handleSubmit} style={STYLE_LOGIN_FORM}>
         <p style={{ textAlign: "center" }}>管理台</p>
         <FormItem>
           <Row style={{ height: 45 }}>
@@ -58,19 +62,13 @@ class Login extends React.Component {
           </Row>
         </FormItem>
         <FormItem>
-          <Button size="large" type="primary" htmlType="submit" className={styles.login_form_button}>登录</Button>
+          <Button size="large" type="primary" htmlType="submit" style={LOGIN_FROM_BUTTON}>登录</Button>
         </FormItem>
       </Form>
     );
   }
 }
 
-const WrappedLogin = Form.create()(Login);
-
-function IndexPage() {
-  return (
-    <WrappedLogin />
-  );
-}
+const IndexPage = Form.create()(Login);
 
 export default connect()(IndexPage);
