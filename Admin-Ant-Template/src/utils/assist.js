@@ -25,3 +25,13 @@ export function queryToJson(str){
     return prev;
   }, {});
 };
+
+/**
+ * 检查参数是否缺失
+ * @param {array} left 必备参数
+ * @param {object} right 传入的参数
+ * @returns {array} 返回缺失的参数，为空表示不缺失
+ */
+export function checkQuery(left, right){
+  return left.filter((v)=> !right.hasOwnProperty(v));
+};
