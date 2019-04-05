@@ -50,5 +50,8 @@
   "engines":{
     "node": ">=8.9.1",
     "npm": ">=6.1.0"
+  },
+  "conf_liberty":{
+    "root": "/admin"
   }
 }

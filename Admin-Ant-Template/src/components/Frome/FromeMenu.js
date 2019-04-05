@@ -1,24 +1,53 @@
 /**
  * @todo 优化 补充注释
+ * @todo 优化 改为函数组件
  */
 import React from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
+
 import routerMap from '@pages';
-import {jsonToQuery} from '@utils/assist';
+import { jsonToQuery } from '@utils/assist';
+import { conf_liberty } from '@pkg';
 
 const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
+/**
+ * 判断路径返回对应的key和openKeys
+ * @returns {object} obj
+ * @param {string} obj.openKeys 上级目录
+ * @param {string} obj.key 子目录
+ */
+function getMenuPath(){
+  const ROOT = conf_liberty.root;
+  const PATH_NAME_ARRAY = window.location.pathname.split('/');
+  let conf = {
+    key: '',
+    openKeys: '',
+  };
+  if(ROOT){
+    conf.openKeys = `/${PATH_NAME_ARRAY[1]}/${PATH_NAME_ARRAY[2]}`;
+    if(PATH_NAME_ARRAY[3]){
+      conf.key = `/${PATH_NAME_ARRAY[1]}/${PATH_NAME_ARRAY[2]}/${PATH_NAME_ARRAY[3]}`;
+    }else{
+      conf.key = `/${PATH_NAME_ARRAY[1]}/${PATH_NAME_ARRAY[2]}`;
+    }
+    
+  }else{
+    conf.openKeys = `/${PATH_NAME_ARRAY[1]}`;
+    conf.key = `/${PATH_NAME_ARRAY[1]}/${PATH_NAME_ARRAY[2]}`;
+  }
+  return conf;
+};
+
 class FromeMenu extends React.Component {
   constructor(props) {
     super(props);
-    /**
-     * @todo 使用router的方法，不用window方法
-     */
-    const locationHash = window.location.hash.indexOf('#') > -1 ? window.location.hash.slice(1) : window.location.pathname;
+    const conf = getMenuPath(); 
     this.state = {
-      key: [locationHash]
+      key: [conf.key],
+      openKeys: [conf.openKeys],
     };
   }
 
@@ -36,8 +65,7 @@ class FromeMenu extends React.Component {
         </Link>
       </Menu.Item>);
     });
-  }
-
+  };
 
   render() {
     const ROUTER_SELECT = routerMap.filter((v) => {
@@ -71,7 +99,8 @@ class FromeMenu extends React.Component {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={this.state.key}
+          defaultOpenKeys={this.state.openKeys} // 上级目录
+          defaultSelectedKeys={this.state.key} // 子级目录
         >
           {MENU_ITEMS}
         </Menu>
