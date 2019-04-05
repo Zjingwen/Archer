@@ -1,9 +1,17 @@
-export function authentication(content){// 检查是否登陆，需要登陆则跳转login
-  const userInfo = window.localStorage.getItem('userInfo');
+import { conf_liberty } from '@pkg';
 
-  if(!userInfo){
-    content.props.history.push('/login');
-  }
+/**
+ * 鉴定登陆权限
+ * @param {object} content this
+ */
+export function authentication(content){// 检查是否登陆，需要登陆则跳转login
+  const PKG_CONF_ROOT = conf_liberty.root;
+  const userInfo = storageGet('userInfo');
+  const path = PKG_CONF_ROOT ? 
+    PKG_CONF_ROOT + '/user/sign':
+    '/user/sign';
+
+  !userInfo && content.props.history.push(path);
 }
 
 export function jsonToQuery(str) {

@@ -8,10 +8,13 @@ import Frome from '@components/Frome';
  * @param {component} WrappedComponent 需要包裹的页面
  */
 export default function index(WrappedComponent){
+  
   return class extends Component{
     constructor(props){
-      super();
-      let query = queryToJson(props.history.location.search);
+      super(props);
+      authentication(this);
+      const query = queryToJson(props.history.location.search);
+
       this.state = {
         query: query,
       };
@@ -25,7 +28,6 @@ export default function index(WrappedComponent){
     }
 
     componentDidMount(){
-      authentication(this);
       this.ref.handleFrom && this.ref.handleFrom();
     };
 

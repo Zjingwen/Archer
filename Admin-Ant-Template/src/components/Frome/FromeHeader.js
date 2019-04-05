@@ -11,6 +11,7 @@ const MenuItem = Menu.Item;
 const PKG_CONF_ROOT = conf_liberty.root;
 
 function FromeHeader(props){
+  const NAME = storageGet('userInfo').name;
   const STYLE_HEADER = {
     background: '#fff',
   };
@@ -24,8 +25,7 @@ function FromeHeader(props){
     cursor: 'pointer',
     transition: 'color .3s',
   };
-
-  const menu = (
+  const MENU = (
     <Menu onClick={()=>outSign()}>
       <MenuItem>
         <span>退出登陆</span>
@@ -44,10 +44,7 @@ function FromeHeader(props){
     window.location.href = path;
   };
 
-  let name = null;
-  if (localStorage.getItem('userInfo')){
-    name = storageGet('userInfo').name;
-  } else outSign();
+  
 
   return (
     <Header style={STYLE_HEADER}>
@@ -60,13 +57,13 @@ function FromeHeader(props){
           />
         </Col>
         <Col span={12} style={STYLE_MENU}>
-          <Dropdown overlay={menu}>
-            <span>{name}</span>
+          <Dropdown overlay={MENU}>
+            <span>{NAME}</span>
           </Dropdown>
         </Col>
       </Row>
     </Header>
   );
-}
+};
 
 export default FromeHeader;
