@@ -15,5 +15,5 @@ module.exports = {
   '@components': path.resolve('src/components'),
   '@pkg': path.resolve('package.json'),
   // '@models': path.resolve('src/models'),
-  '@hoc':path.resolve('src/hoc'),
+  '@hoc': path.resolve('src/hoc'),
 };;

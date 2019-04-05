@@ -7,7 +7,7 @@ import Frome from '@components/Frome';
  * page的高阶组件
  * @param {component} WrappedComponent 需要包裹的页面
  */
-function index(WrappedComponent){
+export default function index(WrappedComponent){
   return class extends Component{
     constructor(props){
       super();
@@ -55,5 +55,3 @@ function index(WrappedComponent){
     };
   };
 };
-
-export default index;

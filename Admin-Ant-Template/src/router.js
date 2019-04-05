@@ -34,13 +34,14 @@ function setRoute({value, root, app}){
     value.path;
 
   if(PAK_CONF_ROOT) PATH = PAK_CONF_ROOT+PATH;
-  
+  const COMPONENT = value.component;
+
   return (
     <Route 
       exact
       key={PATH}
       path={PATH}
-      component={value.component}
+      component={COMPONENT}
     />
   );
 };

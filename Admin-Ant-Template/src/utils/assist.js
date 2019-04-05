@@ -44,6 +44,7 @@ export function storageRemove(item){
 }
 
 export function queryToJson(str){
+  if(str === '') return '';
   return str.split('?')[1].split('&').reduce(function(prev, curr, i, arr) {
     let p = curr.split('=');
     prev[decodeURIComponent(p[0])] = decodeURIComponent(p[1]);
