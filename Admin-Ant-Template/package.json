@@ -1,7 +1,7 @@
 {
   "name": "admin",
-  "version": "1.0.0",
-  "description": "ant管理台通用模版",
+  "version": "1.2.5",
+  "description": "管理台通用模版",
   "author": "jingwen <309940379@qq.com>",
   "main": "src/index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "react",
     "admin",
     "antd",
-    "admin-template"
+    "template"
   ],
   "repository": {
     "type": "git",
@@ -50,5 +50,14 @@
   "engines":{
     "node": ">=8.9.1",
     "npm": ">=6.1.0"
+  },
+  "conf_liberty":{
+    "root": "/admin",
+    "path": "mock",
+    "url": {
+      "mock": "http://localhost:8000/",
+      "development": "http://localhost:8001/",
+      "production": "http://localhost:8002/"
+    }
   }
 }

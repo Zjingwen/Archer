@@ -5,6 +5,7 @@
  * @components 公共组建
  * @models redux数据流
  * @hoc 高阶组件
+ * @pkg package.json配置
  */
 let path = require('path');
 
@@ -12,6 +13,7 @@ module.exports = {
   '@utils': path.resolve('src/utils'),
   '@pages': path.resolve('src/pages'),
   '@components': path.resolve('src/components'),
+  '@pkg': path.resolve('package.json'),
   // '@models': path.resolve('src/models'),
-  // '@hoc':path.resolve('src/hoc'),
+  '@hoc': path.resolve('src/hoc'),
 };;

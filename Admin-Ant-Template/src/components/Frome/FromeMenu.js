@@ -1,43 +1,83 @@
 /**
- * @todo 优化 补充注释
+ * @todo 优化 改为函数组件
+ * @todo 优化 linkPath的做法太过耦合
  */
 import React from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
+
 import routerMap from '@pages';
-import {jsonToQuery} from '@utils/assist';
+import { jsonToQuery } from '@utils/assist';
+import { conf_liberty } from '@pkg';
 
 const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
+const PAK_CONF_ROOT = conf_liberty.root;
+
+/**
+ * 判断路径返回对应的key和openKeys
+ * @returns {object} obj
+ * @param {string} obj.openKeys 上级目录
+ * @param {string} obj.key 子目录
+ */
+function getMenuPath(){
+  /**
+   * @todo 优化 改为引入router.js
+   * @todo 优化 判断改为配置
+   */
+  const PATH_NAME_ARRAY = window.location.pathname.split('/');
+  let conf = {
+    key: '',
+    openKeys: '',
+  };
+  if(PAK_CONF_ROOT){
+    conf.openKeys = `/${PATH_NAME_ARRAY[1]}/${PATH_NAME_ARRAY[2]}`;
+    if(PATH_NAME_ARRAY[3]){
+      conf.key = `/${PATH_NAME_ARRAY[1]}/${PATH_NAME_ARRAY[2]}/${PATH_NAME_ARRAY[3]}`;
+    }else{
+      conf.key = `/${PATH_NAME_ARRAY[1]}/${PATH_NAME_ARRAY[2]}`;
+    }
+    
+  }else{
+    conf.openKeys = `/${PATH_NAME_ARRAY[1]}`;
+    if(PATH_NAME_ARRAY[2]){
+      conf.key = `/${PATH_NAME_ARRAY[1]}/${PATH_NAME_ARRAY[2]}`;
+    }else{
+      conf.key = `/${PATH_NAME_ARRAY[1]}`;
+    }
+  }
+  return conf;
+};
 
 class FromeMenu extends React.Component {
   constructor(props) {
     super(props);
-    /**
-     * @todo 使用router的方法，不用window方法
-     */
-    const locationHash = window.location.hash.indexOf('#') > -1 ? window.location.hash.slice(1) : window.location.pathname;
+    const conf = getMenuPath(); 
     this.state = {
-      key: [locationHash]
+      key: [conf.key],
+      openKeys: [conf.openKeys],
     };
   }
 
   subMenuChildrens({next, path}){
     return next.map((value)=>{
-      const QUERY = value.hasOwnProperty('query') ? jsonToQuery(value.query) : '';
-      const PATH = path + value.path;
+      const QUERY = value.hasOwnProperty('query') ? 
+        jsonToQuery(value.query) :
+        '';
+      let linkPath = path + value.path;
 
-      return (<Menu.Item key={PATH}>
+      if(PAK_CONF_ROOT) linkPath = PAK_CONF_ROOT + linkPath;
+
+      return (<Menu.Item key={linkPath}>
         <Link to={{
-          pathname: PATH,
+          pathname: linkPath,
           search: `?${QUERY}`
         }}>
           <Icon type={value.iconType} />{value.breadcrumbName}
         </Link>
       </Menu.Item>);
     });
-  }
-
+  };
 
   render() {
     const ROUTER_SELECT = routerMap.filter((v) => {
@@ -46,8 +86,13 @@ class FromeMenu extends React.Component {
     });
 
     const MENU_ITEMS = ROUTER_SELECT.map((value) => {
+      let linkPath = PAK_CONF_ROOT ? 
+        PAK_CONF_ROOT + value.path:    
+        value.path;
+
       if(value.hasOwnProperty('next')){
-        return(<SubMenu key={value.path} title={<><Icon type={value.iconType} /><span>{value.breadcrumbName}</span></>}>
+        
+        return(<SubMenu key={linkPath} title={<><Icon type={value.iconType} /><span>{value.breadcrumbName}</span></>}>
           {this.subMenuChildrens({
             next: value.next,
             path: value.path,
@@ -55,13 +100,13 @@ class FromeMenu extends React.Component {
         </SubMenu>);
       };
 
-      return (<Menu.Item key={value.path}>
-        <Link to={value.path}>
+      return (<Menu.Item key={linkPath}>
+        <Link to={linkPath}>
           <Icon type={value.iconType} /><span>{value.breadcrumbName}</span>
         </Link>
       </Menu.Item>);
     });
-
+    
     return (
       <Sider
         trigger={null}
@@ -71,7 +116,8 @@ class FromeMenu extends React.Component {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={this.state.key}
+          defaultOpenKeys={this.state.openKeys} // 上级目录
+          defaultSelectedKeys={this.state.key} // 子级目录
         >
           {MENU_ITEMS}
         </Menu>

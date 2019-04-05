@@ -26,7 +26,7 @@ export default {
         msg: 'ok',
       },
       result: {
-        name: 'admin-template',
+        name: Random.string( '壹贰叁肆伍陆柒捌玖拾', 3, 5 ),
         sign: Random.string('lower',20),
       },
     });

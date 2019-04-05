@@ -1,7 +1,10 @@
 import React from 'react';
 import { Router, Route, Switch } from 'dva/router';
-import routerMap from './pages';
+import {conf_liberty} from '@pkg';
 import NotFound from '@pages/notFoundPage/404';
+import routerMap from './pages';
+
+const PAK_CONF_ROOT = conf_liberty.root;
 
 /**
  * 将model注册到app中
@@ -23,18 +26,22 @@ function registerModel(app, model){
  * @returns {function} React.component 对象
  */
 function setRoute({value, root, app}){
+  // 判断是否要注册model
   value.model && registerModel(app, value.model);
 
-  const PATH = root ? 
+  let PATH = root ? 
     root + value.path:
     value.path;
+
+  if(PAK_CONF_ROOT) PATH = PAK_CONF_ROOT+PATH;
+  const COMPONENT = value.component;
 
   return (
     <Route 
       exact
       key={PATH}
       path={PATH}
-      component={value.component}
+      component={COMPONENT}
     />
   );
 };
