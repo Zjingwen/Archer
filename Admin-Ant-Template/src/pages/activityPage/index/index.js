@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'dva';
 import Title from '@components/Title';
-import Frome from '@components/Frome';
+import HOCpage from '@hoc/HOCpage';
 
-function IndexPage() {
-  return (
-    <Frome>
+@HOCpage
+class IndexPage extends React.Component{
+  render(){
+    return (
       <Title title='活动列表页面'/>
-    </Frome>
-  );
+    );
+  }
 }
 
 export default connect()(IndexPage);
