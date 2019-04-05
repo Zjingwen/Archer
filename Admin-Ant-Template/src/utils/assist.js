@@ -18,6 +18,31 @@ export function jsonToQuery(str) {
   return _str;
 };
 
+/**
+ * 获取localStorage并且换转object
+ * @param {string} item localStorage 的名称
+ * @returns {object || false } 存在返回值存在返回false;
+ */
+export function storageGet(item){
+  if(localStorage.getItem(item)){
+    return JSON.parse(localStorage.getItem(item));
+  }
+  return false;
+};
+
+/**
+ * 删除localStorage
+ * @param {string} item localStorage 的名称
+ * @returns {boolean} 成功返回true，失败返回false
+ */
+export function storageRemove(item){
+  if(localStorage.getItem(item)){
+    localStorage.removeItem(item);
+    return true;
+  }
+  return false;
+}
+
 export function queryToJson(str){
   return str.split('?')[1].split('&').reduce(function(prev, curr, i, arr) {
     let p = curr.split('=');

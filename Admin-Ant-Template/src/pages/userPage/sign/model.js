@@ -1,6 +1,8 @@
 import { routerRedux } from 'dva/router';
 import request from '@utils/request';
 import {message} from 'antd';
+import { conf_liberty } from '@pkg';
+const PKG_CONF_ROOT = conf_liberty.root;
 
 export default {
   namespace: 'userSign',
@@ -17,7 +19,10 @@ export default {
           name: json.result.name,
           sign: json.result.sign,
         }));
-        yield put(routerRedux.push('/admin/index'));
+        const path = PKG_CONF_ROOT ? 
+          PKG_CONF_ROOT + '/index':
+          '/index';
+        yield put(routerRedux.push(path));
       }else{
         message.error(msg);
       };
