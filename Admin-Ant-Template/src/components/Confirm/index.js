@@ -6,10 +6,10 @@
     cancelText: string,
     okType: 'danger' || 'primary',
     onOk() {
-        
+
     },
     onCancel() {
-        
+
     },
  * }
  */
@@ -18,5 +18,5 @@
 import { Modal } from 'antd';
 
 export default (conf) => {
-    Modal.confirm({...conf})
-}
+  Modal.confirm({...conf});
+};

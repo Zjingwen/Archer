@@ -1,3 +1,6 @@
+/**
+ * @todo 优化 将PATH改为package中的conf_liberty
+ */
 import 'antd/node_modules/moment/locale/zh-cn';
 import './index.css';
 
@@ -15,7 +18,7 @@ const app = dva({
   },
   history: browserHistory(),
   onError(e){
-    message.error(e);
+    message.error(e.toString());
   },
 });
 

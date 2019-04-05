@@ -19,7 +19,7 @@ export default {
       });
       return false;
     }
-    
+
     res.json({
       status: {
         code: 1001,
