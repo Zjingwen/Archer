@@ -29,7 +29,7 @@ module.exports = {
     //禁止jsdoc
     "require-jsdoc": [0],
     //强制两空格缩进
-    "indent": [2, 2],
+    "indent": ["error", 2],
     //禁止 for 循环出现方向错误的循环，比如 for (i = 0; i < 10; i--)
     'for-direction': 'error',
     //使用 === 替代 ==

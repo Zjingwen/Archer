@@ -1,30 +1,30 @@
 export default {
 
-    namespace: 'app',
+  namespace: 'app',
 
-    state: {
-        loginLoading: false
+  state: {
+    loginLoading: false
+  },
+
+  subscriptions: {
+    setup({ dispatch, history }) {
     },
+  },
 
-    subscriptions: {
-        setup({ dispatch, history }) {
-        },
+  effects: {
+
+  },
+
+  reducers: {
+    showLoginLoading(state) {
+      return {
+        loginLoading: true,
+      };
     },
-
-    effects: {
-
-    },
-
-    reducers: {
-        showLoginLoading(state) {
-            return {
-                loginLoading: true,
-            }
-        },
-        hideLoginLoading(state) {
-            return {
-                loginLoading: false,
-            }
-        }
-    },
+    hideLoginLoading(state) {
+      return {
+        loginLoading: false,
+      };
+    }
+  },
 };

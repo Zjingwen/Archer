@@ -7,8 +7,7 @@
   "scripts": {
     "start": "roadhog server",
     "build": "roadhog build",
-    "lint": "eslint --ext .js src test",
-    "precommit": "npm run lint"
+    "lint": "eslint --ext .js src"
   },
   "keywords": [
     "react",
@@ -47,17 +46,22 @@
     "redbox-react": "1.4.3",
     "roadhog": "2.5.0-beta.4"
   },
-  "engines":{
+  "engines": {
     "node": ">=8.9.1",
     "npm": ">=6.1.0"
   },
-  "conf_liberty":{
+  "conf_liberty": {
     "root": "/admin",
     "path": "mock",
     "url": {
       "mock": "http://localhost:8000/",
       "development": "http://localhost:8001/",
       "production": "http://localhost:8002/"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
     }
   }
 }
