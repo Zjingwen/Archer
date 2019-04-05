@@ -4,7 +4,7 @@
 import index from './index/index';// 首页
 
 export default {
-  path: '/admin/index',
+  path: '/index',
   component: index,
   breadcrumbName: '主页',
   iconType: 'desktop',

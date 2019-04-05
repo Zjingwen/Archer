@@ -2,7 +2,7 @@ import index from './index';// 已上线
 import end from './end';// 活动管理
 
 export default {
-  path: '/admin/activity',
+  path: '/activity',
   breadcrumbName: '活动管理',
   iconType: 'bulb',
   next:[

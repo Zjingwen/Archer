@@ -2,7 +2,7 @@ import sign from './sign';// 登陆
 import signModel from './sign/model';
 
 export default {
-  path: '/admin/user',
+  path: '/user',
   menu: false,
   next:[
     {
