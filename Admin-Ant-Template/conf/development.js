@@ -1,5 +1,6 @@
-const URL = require('./url');
-let alias = require('./alias');
+const alias = require('./alias');
+const PATH = require('../package.json').conf_liberty['path'];
+const URL = require('../package.json').conf_liberty['url'];
 
 module.exports = {
   "entry": "src/index.js",
@@ -26,7 +27,7 @@ module.exports = {
   },
   "proxy":{
     "/api":{
-      "target": URL,
+      "target": URL[PATH],
       "changeOrigin": true,
       "pathRewrite": {"^/api": ""},
     },
