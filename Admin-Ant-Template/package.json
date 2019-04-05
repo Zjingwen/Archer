@@ -1,6 +1,6 @@
 {
   "name": "admin",
-  "version": "1.0.0",
+  "version": "1.2.5",
   "description": "管理台通用模版",
   "author": "jingwen <309940379@qq.com>",
   "main": "src/index.js",
