@@ -8,7 +8,6 @@ import Frome from '@components/Frome';
  * @param {component} WrappedComponent 需要包裹的页面
  */
 export default function index(WrappedComponent){
-  
   return class extends Component{
     constructor(props){
       super(props);
@@ -43,11 +42,11 @@ export default function index(WrappedComponent){
     storeRef(ref){
       this.ref = ref;
     };
-    
+
     render(){
       return(
         <Frome>
-          <WrappedComponent 
+          <WrappedComponent
             {...this.props}
             {...this.state}
             ref = {this.storeRef}
