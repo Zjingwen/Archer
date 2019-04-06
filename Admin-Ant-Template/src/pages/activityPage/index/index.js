@@ -1,7 +1,9 @@
 import {Component} from 'react';
 import { connect } from 'dva';
-import Title from '@components/Title';
+import HOCpage from '@hoc/HOCpage';
 
+import Title from '@components/Title';
+@HOCpage
 class IndexPage extends Component{
   render(){
     return (

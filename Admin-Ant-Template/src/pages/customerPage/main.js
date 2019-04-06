@@ -1,10 +1,8 @@
-import HOCpage from '@hoc/HOCpage';
-
-import index from './index';// 标签管理
+import loadable from '@utils/loadable';
 
 export default {
   path: '/coustomer',
-  component: HOCpage(index),
+  component: loadable(import ('./index')),
   breadcrumbName: '充值管理',
   iconType: 'pay-circle',
   query: {

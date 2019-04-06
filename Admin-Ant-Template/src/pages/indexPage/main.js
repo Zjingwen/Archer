@@ -1,13 +1,10 @@
 /**
  * @todo 优化 rotuer中的path选项支持String或者Array，可以支持多个路由跳转一个页面
  */
-import HOCpage from '@hoc/HOCpage';
-import index from './index';// 首页
+import loadable from '@utils/loadable';
 
 export default {
   path: '/index',
-  component: HOCpage(index),
-  breadcrumbName: '主页',
-  iconType: 'desktop',
+  component: loadable(import('./index')),
   menu: false
 };
