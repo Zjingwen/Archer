@@ -1,5 +1,5 @@
-import sign from './sign';// 登陆
 import signModel from './sign/model';
+import loadable from '@utils/loadable';
 
 export default {
   path: '/user',
@@ -7,9 +7,7 @@ export default {
   next:[
     {
       path: '/sign',
-      component: sign,
-      breadcrumbName: '已上线',
-      iconType: 'bulb',
+      component: loadable(import ('./sign')),
       model: signModel,
     }
   ]

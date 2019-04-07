@@ -1,7 +1,4 @@
-import HOCpage from '@hoc/HOCpage';
-
-import index from './index';// 已上线
-import end from './end';// 活动管理
+import loadable from '@utils/loadable';
 
 export default {
   path: '/activity',
@@ -10,7 +7,7 @@ export default {
   next:[
     {
       path: '/index',
-      component: HOCpage(index),
+      component: loadable(import('./index')),
       breadcrumbName: '已上线',
       iconType: 'bulb',
       query: {
@@ -20,7 +17,7 @@ export default {
     },
     {
       path: '/end',
-      component: HOCpage(end),
+      component: loadable(import('./end')),
       breadcrumbName: '已结束',
       iconType: 'bulb',
       query: {
