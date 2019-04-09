@@ -6,7 +6,7 @@ import FromeHeader from './FromeHeader';
 
 const { Content } = Layout;
 
-function FromeFun (props){
+export default function Frome (props){
   const [collapsed, setCollapsed] = useState(false);
   const STYLE_LAYOUT = {
     height: '100%'
@@ -31,5 +31,3 @@ function FromeFun (props){
     </Layout>
   );
 }
-
-export default FromeFun;
