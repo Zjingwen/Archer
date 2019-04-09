@@ -20,6 +20,9 @@
     "url": "git+https://github.com/Zjingwen/Archer.git"
   },
   "dependencies": {
+
+  },
+  "devDependencies": {
     "antd": "3.16.1",
     "babel-plugin-import": "1.6.7",
     "co": "4.6.0",
@@ -27,15 +30,11 @@
     "history": "4.7.2",
     "mockjs": "1.0.1-beta3",
     "moment": "2.22.2",
-    "prop-types": "15.6.2",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "underscore": "1.9.1"
-  },
-  "devDependencies": {
+    "underscore": "1.9.1",
     "axios": "0.18.0",
     "babel-plugin-dva-hmr": "0.3.2",
-    "co": "^4.6.0",
     "eslint": "4.14.0",
     "eslint-config-umi": "0.1.1",
     "eslint-plugin-flowtype": "2.34.1",
