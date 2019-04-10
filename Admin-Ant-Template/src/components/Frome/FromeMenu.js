@@ -37,7 +37,7 @@ function getMenuPath(){
     }else{
       conf.key = `/${PATH_NAME_ARRAY[1]}/${PATH_NAME_ARRAY[2]}`;
     }
-    
+
   }else{
     conf.openKeys = `/${PATH_NAME_ARRAY[1]}`;
     if(PATH_NAME_ARRAY[2]){
@@ -52,7 +52,7 @@ function getMenuPath(){
 class FromeMenu extends React.Component {
   constructor(props) {
     super(props);
-    const conf = getMenuPath(); 
+    const conf = getMenuPath();
     this.state = {
       key: [conf.key],
       openKeys: [conf.openKeys],
@@ -61,7 +61,7 @@ class FromeMenu extends React.Component {
 
   subMenuChildrens({next, path}){
     return next.map((value)=>{
-      const QUERY = value.hasOwnProperty('query') ? 
+      const QUERY = value.hasOwnProperty('query') ?
         jsonToQuery(value.query) :
         '';
       let linkPath = path + value.path;
@@ -86,13 +86,17 @@ class FromeMenu extends React.Component {
     });
 
     const MENU_ITEMS = ROUTER_SELECT.map((value) => {
-      let linkPath = PAK_CONF_ROOT ? 
-        PAK_CONF_ROOT + value.path:    
+      const PATH = PAK_CONF_ROOT ?
+        PAK_CONF_ROOT + value.path:
         value.path;
 
+      const QUERY = value.hasOwnProperty('query') ?
+        jsonToQuery(value.query) :
+        '';
+
       if(value.hasOwnProperty('next')){
-        
-        return(<SubMenu key={linkPath} title={<><Icon type={value.iconType} /><span>{value.breadcrumbName}</span></>}>
+
+        return(<SubMenu key={PATH} title={<><Icon type={value.iconType} /><span>{value.breadcrumbName}</span></>}>
           {this.subMenuChildrens({
             next: value.next,
             path: value.path,
@@ -100,13 +104,16 @@ class FromeMenu extends React.Component {
         </SubMenu>);
       };
 
-      return (<Menu.Item key={linkPath}>
-        <Link to={linkPath}>
+      return (<Menu.Item key={PATH}>
+        <Link to={{
+          pathname: PATH,
+          search: QUERY,
+        }}>
           <Icon type={value.iconType} /><span>{value.breadcrumbName}</span>
         </Link>
       </Menu.Item>);
     });
-    
+
     return (
       <Sider
         trigger={null}
